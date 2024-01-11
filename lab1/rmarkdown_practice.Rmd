@@ -1,0 +1,28 @@
+---
+title: "RMarkdown Practice"
+author: "Itzel"
+date: "2024-01-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Title
+### Title
+#### Title
+[BIS 15L Webpage](https://jmledford3115.github.io/datascibiol/)
+[Joel Ledford](jmledford@ucdavis.edu)
+```{r}
+x <- c(3,4,5,6,7,8,6)
+```
+
+```{r}
+mean(x)
+```
+```{r}
+#install.packages("tidyverse")
+library("tidyverse")
+```
+
