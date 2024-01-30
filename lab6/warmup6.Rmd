@@ -1,0 +1,55 @@
+---
+title: "Warm_up6"
+output: html_document
+date: "2024-01-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r message=FALSE, warning=FALSE}
+library("tidyverse")
+library("janitor")
+```
+
+```{r}
+bison_data <- read_csv("data/bison.csv")
+```
+```{r}
+dim(bison_data)
+```
+```{r}
+glimpse(bison_data)
+```
+```{r}
+new_bison_data <- select(bison_data, "animal_code", "animal_sex", "animal_weight", "animal_yob")
+new_bison_data
+```
+### Ledford's example of piping in class but the previous code also works
+```{r}
+bison_new <- bison_data %>%
+  select(animal_code, animal_sex, animal_weight, animal_yob)
+```
+### Ledford's example:
+```{r}
+bison_new %>%
+  filter(animal_yob>= 1980 & animal_yob<= 1990)
+```
+
+### My example
+```{r}
+newest_bison_data <- new_bison_data %>%
+  filter(between(animal_yob, 1980, 1990))%>%
+  arrange(animal_yob)
+```
+
+```{r}
+table(newest_bison_data$animal_sex)
+```
+### Mean of males
+```{r}
+mean(M$animal_weight)
+```
