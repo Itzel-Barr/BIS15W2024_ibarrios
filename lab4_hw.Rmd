@@ -31,14 +31,13 @@ Data: http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1
 
 **1. Load the data into a new object called `homerange`.**
 ```{r}
-homerange <- read_csv("lab4/data/Tamburelloetal_HomeRangeDatabase.csv")
+homerange <- read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
 ```
 
 **2. Explore the data. Show the dimensions, column names, classes for each variable, and a statistical summary. Keep these as separate code chunks.**  
 ```{r}
 dim(homerange)
 ```
-
 ```{r}
 names(homerange)
 ```
@@ -84,11 +83,11 @@ table(homerange$trophic.guild)
 carnivores_homerange <- filter(homerange, trophic.guild=="carnivore")
 carnivores_homerange
 ```
+
 ```{r}
 herbivores_homerange <- filter(homerange, trophic.guild=="herbivore")
 herbivores_homerange
 ```
-
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
 ```{r}
@@ -102,13 +101,28 @@ anyNA(herbivores_homerange)
 
 **9. Make a new dataframe `owls` that is limited to the mean mass, log10 mass, family, genus, and species of owls in the database. Which is the smallest owl? What is its common name? Do a little bit of searching online to see what you can learn about this species and provide a link below** 
 ```{r}
-owls <- 
+owls <- filter(homerange, family=="strigidae")
+owls
 ```
+
+```{r}
+owls %>%
+  select("family", "genus", "species", "mean.mass.g", "log10.mass", "common.name")
+```
+
+```{r}
+owls %>%
+  filter(mean.mass.g<=62)
+```
+### The smallest owl is named Eurasian pygmy owl. They have prominent golden eyes and are mainly active during dusk or dawn. https://ebird.org/species/eupowl1
 
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 ```{r}
-
+homerange %>%
+  select(mean.hra.m2, common.name, taxon)%>%
+  filter(taxon=="birds")%>%
+  arrange(desc(mean.hra.m2))
 ```
-
+### The caracara is located near the Mexican border and Florida and is considered to be agressive as they may steal food from other birds. 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
