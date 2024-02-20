@@ -4,3 +4,6 @@ Contact me: [Itzel Barrios] (imbarrios@ucdavis.edu)
 ## Little Bit About Me
 I am a second-year Biological Science major at UC Davis! This is my first time learning how to code and I am super excited to be in this course!!
 I'm from southern California and I hope to gain a lot of interesting skills from this course. ;)
+
+# Homework
+My homework is stored in the folder named lab_homework
