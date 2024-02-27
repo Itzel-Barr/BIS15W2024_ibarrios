@@ -148,6 +148,14 @@ gapminder%>%
   mutate(lifeyear=2007-1952)%>%
   arrange(desc(lifeyear))
 ```
+```{r}
+gapminder%>%
+  filter(country=="Afghanistan" | country=="Albania" | country=="Algeria" | country=="Angola")%>%
+  select(year, country, lifeExp)%>%
+  ggplot(aes(x=year, y=lifeExp, group=country, color=country))+
+  geom_line()
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
