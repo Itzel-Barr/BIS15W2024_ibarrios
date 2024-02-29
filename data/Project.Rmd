@@ -1,0 +1,32 @@
+---
+title: "BIS 15L Project"
+output: html_document
+date: "2024-02-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+Eliminations<- read.csv("../data/eliminations_and_dates.csv")
+```
+
+```{r}
+Hometown<- read.csv("../data/hometown_coordinates.csv")
+```
+
+```{r}
+Seasons<- read.csv("../data/season_details.csv")
+```
+
+```{r}
+Contestants <- read.csv("../data/contestant_details.csv")
+```
+
+```{r}
+Compact_eliminations <- read.csv("../data/eliminations_and_dates_compact.csv")
+```
+
