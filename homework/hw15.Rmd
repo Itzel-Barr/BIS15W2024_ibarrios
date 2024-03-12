@@ -1,0 +1,106 @@
+---
+title: "BIS15L_AI_hmwk"
+author: "Itzel Barrios"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+This homework is a bit less traditional this week. There are some errors in the code below. In addition add notes and titles to the code chunks that explains what the code chunck does. Use AI tools, notes from class, or any other resources to help fix the errors. Feel free to edit any plots to your preference. Don't forget to answer the two questions at the bottom. Upon completion, you should not have to '#' out any of the code chunks.
+
+Push your final work to your repository. Your final lab report should be organized, clean, and run free from errors. Remember, you must remove the `#` for the included code chunks to run. Be sure to add your name to the author header above.   
+
+Again make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(dplyr)
+```
+
+1.Load the data from the blood_count_dataset.csv file.
+```{r}
+blood_count <- read_csv("../lab15/data/blood_count_dataset.csv")%>% clean_names()
+```
+
+2. What is the structure of the data?
+
+```{r}
+glimpse(blood_count)
+```
+
+3. Find the min, mean, and max of the red blood cell count by gender.
+```{r}
+blood_count %>% 
+  group_by(gender) %>% 
+  summarize(min=min(red_blood_cells),
+            mean=mean(red_blood_cells),
+            max=max(red_blood_cells))
+```
+
+
+4. Find the mean of the blood count tests for males. 
+```{r}
+blood_count %>% 
+  filter(gender == "male")%>%
+  select(3:9) %>%
+  colMeans(na.rm = TRUE)
+```
+
+5. Find the mean for females. 
+```{r}
+blood_count %>% 
+  filter(gender == "Female")%>%
+  select(3:9) %>%
+  colMeans(na.rm = T)
+```
+
+
+6. Make a boxplot. 
+```{r}
+
+blood_count %>%
+  pivot_longer(cols = 3:9, names_to = "test", values_to = "values") %>%
+  ggplot(aes(x = gender, y = values, fill = gender)) +
+  geom_boxplot() +
+  facet_wrap(~ test, scales = "free") 
+  labs(title = "Boxplot of Blood Count Tests",
+       x = "Test",
+       y = "Values")
+
+```
+
+7. Create a new column called "Age_Group" that groups the ages into 20s, 30s, 40s, 50s, and 60s.
+```{r}
+grouped_bc <- blood_count %>%
+  mutate(Age_Group = case_when(
+    age >= 20 & age <= 29 ~ "20s",
+    age >= 30 & age <= 39 ~ "30s",
+    age >= 40 & age <= 49 ~ "40s",
+    age >= 50 & age <= 59 ~ "50s",
+    age >= 60 & age <= 70 ~ "60s"))
+```
+
+8. Make a boxplot of the blood count tests by age group.
+```{r}
+grouped_bc %>% 
+  pivot_longer(cols = 3:9, names_to = "test", values_to = "values") %>%
+  ggplot(aes(x = Age_Group, y = values, fill = Age_Group)) + 
+  geom_boxplot() +
+  facet_wrap( ~test, scales = "free") +  
+  labs(title = "Boxplot of Blood Count Tests by Age Group",
+       x = "Age Group",
+       y = "Values")
+```
+9. What are two drawbacks and two benefits of AI?
+One drawback is that AI can misinterpret certain questions or not answer them completely. Another drawback is that people might become too reliant on AI to code. One benefit is that AI is faster than humans at coding. Another benefit is that it ensure there are never any grammatical errors in your code. 
+10. Do you think you will use AI for coding in the future? Why or why not?
+I think I might use AI in the future but mostly to ensure that there are no grammatical or silly errors in my code if the chunk refuses to run. 
+
+## Push your final code to GitHub!
+Please be sure that you check the `keep md` file in the knit preferences. 
